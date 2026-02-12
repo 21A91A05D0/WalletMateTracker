@@ -3,6 +3,7 @@ package com.example.walletmatetracker.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.walletmatetracker.data.repository.ExpenseRepository
+import com.example.walletmatetracker.ui.analytics.AnalyticsViewModel
 import com.example.walletmatetracker.ui.charts.ChartsViewModel
 import com.example.walletmatetracker.ui.home.HomeSummaryViewModel
 
@@ -23,6 +24,11 @@ class MainViewModelFactory(
 
             modelClass.isAssignableFrom(ChartsViewModel::class.java) ->
                 ChartsViewModel(repository) as T
+
+            modelClass.isAssignableFrom(AnalyticsViewModel::class.java) ->
+                AnalyticsViewModel(repository) as T
+
+
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

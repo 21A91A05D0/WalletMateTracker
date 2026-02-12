@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 
 import com.example.walletmatetracker.ui.addtransaction.AddTransactionActivity
 import com.example.walletmatetracker.ui.addtransaction.TransactionDetailActivity
+import com.example.walletmatetracker.ui.analytics.AnalyticsActivity
 import com.example.walletmatetracker.ui.home.HomeSummaryViewModel
 
 import com.example.walletmatetracker.ui.charts.ChartsActivity
@@ -68,10 +69,12 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-//                R.id.nav_ai -> {
-//                    loadFragment(AiFragment())
-//                    true
-//                }
+                R.id.navAnalytics -> {
+                    startActivity(Intent(this, AnalyticsActivity::class.java))
+                    true
+                }
+
+
 
 //                R.id.nav_profile -> {
 //                    loadFragment(ProfileFragment())
@@ -97,6 +100,8 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, AddTransactionActivity::class.java)
             )
         }
+
+
 
 
 

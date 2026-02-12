@@ -24,6 +24,10 @@
             android:name=".ui.charts.ChartsActivity"
             android:exported="false"/>
 
+        <activity
+            android:name=".ui.analytics.AnalyticsActivity"
+            android:exported="false"/>
+
 
 
         <activity
