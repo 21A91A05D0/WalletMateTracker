@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+
+
+    <!-- Primary -->
+    <color name="purple_primary">#6042D9</color>
+    <color name="purple_secondary">#886DF1</color>
+    <color name="purple_light">#D1C6FA</color>
+
+
+    <color name="field_bg">#F6F5FF</color>
+
+
+
+    <!-- Text -->
+    <color name="text_primary">#3E4045</color>
+    <color name="text_secondary">#51545A</color>
+    <color name="text_hint">#8E98A8</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="green_light">#E6F8ED</color>
+    <color name="red_primary">#E53935</color>
+    <color name="green_primary">#2ECC71</color>
+    <color name="orange_light">#FFF3E0</color>
+    <color name="blue_light">#E3F2FD</color>
+    <color name="gray_light">#F2F2F7</color>
+
+    <color name="red_expense">#E53935</color>
+    <color name="green_income">#2E7D32</color>
+
+
+
+</resources>
