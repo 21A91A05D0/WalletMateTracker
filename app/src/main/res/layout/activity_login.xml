@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F7FB"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:layout_marginTop="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/walletmate_logo" />
+
+        <!-- Title -->
+        <TextView
+            android:text="Login your account"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:text="Log in to manage care"
+            android:textSize="14sp"
+            android:textColor="#8A8A8A"
+            android:textAlignment="center"
+            android:layout_marginBottom="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Remember + Forgot -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remember me"/>
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="Forgot Password?"
+                android:textSize="13sp"
+                android:textColor="#2F80ED"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Sign In -->
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#2F80ED"/>
+
+        <!-- OR -->
+        <TextView
+            android:layout_marginTop="18dp"
+            android:text="or log in with"
+            android:textSize="14sp"
+            android:textColor="#8A8A8A"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Google Login -->
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:text="Continue with Google"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:backgroundTint="#FFFFFF"
+            app:icon="@drawable/ic_google"
+            app:iconTint="@null"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconSize="20dp"/>
+
+        <!-- Sign Up -->
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_marginTop="22dp"
+            android:text="Don't have an account? Sign Up"
+            android:textSize="14sp"
+            android:textColor="#2F80ED"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

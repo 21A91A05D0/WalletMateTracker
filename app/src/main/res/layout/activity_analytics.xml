@@ -1,21 +1,124 @@
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:background="#F7F8FC"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fitsSystemWindows="true">
 
+    <!-- Top Heading -->
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Smart Budget Analytics"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:textColor="#3E4045"
+        android:padding="16dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecommendations"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Financial Health Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardHealth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:padding="24dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Title -->
+                    <TextView
+                        android:text="Financial Health"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- Score + Status Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:id="@+id/tvScore"
+                            android:textSize="40sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:text="/ 100"
+                            android:textColor="#E0E0E0"
+                            android:textSize="18sp"
+                            android:layout_marginStart="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/white"
+                            android:layout_marginStart="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <!-- Horizontal Progress -->
+                    <ProgressBar
+                        android:id="@+id/progressHealth"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="@android:color/white"
+                        android:progressBackgroundTint="#B39DDB"/>
+
+                    <!-- Insight Message -->
+                    <TextView
+                        android:id="@+id/tvInsight"
+                        android:textColor="#EDE7F6"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecommendations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

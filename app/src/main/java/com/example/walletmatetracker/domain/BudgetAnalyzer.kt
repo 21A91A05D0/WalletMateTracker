@@ -1,82 +1,89 @@
 package com.example.walletmatetracker.domain
 
-
 import com.example.walletmatetracker.data.local.entity.ExpenseEntity
+//import com.example.walletmatetracker.data.local.entity.TransactionType
+import com.example.walletmatetracker.domain.model.FinancialHealth
 import com.example.walletmatetracker.domain.model.Recommendation
 import com.example.walletmatetracker.domain.model.TransactionType
-import java.util.Calendar
+
 
 object BudgetAnalyzer {
 
-    fun analyze(transactions: List<ExpenseEntity>): List<Recommendation> {
+    fun calculateHealth(transactions: List<ExpenseEntity>): FinancialHealth {
 
-        val recommendations = mutableListOf<Recommendation>()
+        val expenses =
+            transactions.filter { it.transactionType == TransactionType.EXPENSE }
 
-        val expenses = transactions.filter {
-            it.transactionType == TransactionType.EXPENSE
-        }
-
-        val incomes = transactions.filter {
-            it.transactionType == TransactionType.INCOME
-        }
+        val incomes =
+            transactions.filter { it.transactionType == TransactionType.INCOME }
 
         val totalExpense = expenses.sumOf { it.amount }
         val totalIncome = incomes.sumOf { it.amount }
-
-        if (totalIncome == 0.0) return emptyList()
-
         val savings = totalIncome - totalExpense
 
-        // 🔹 Overspending Detection
-        if (totalExpense > totalIncome * 0.8) {
-            recommendations.add(
-                Recommendation(
-                    title = "⚠ Overspending Alert",
-                    description = "You're spending more than 80% of your income.",
-                    priority = 3
-                )
-            )
+        if (totalIncome == 0.0) {
+            return FinancialHealth(0, "No Income", 0.0, totalExpense, savings)
         }
 
-        // 🔹 Highest Spending Category
-        val categoryMap = expenses.groupBy { it.category }
-            .mapValues { entry -> entry.value.sumOf { it.amount } }
+        val ratio = totalExpense / totalIncome
+        val score = ((1 - ratio) * 100).toInt().coerceIn(0, 100)
 
-        val highestCategory = categoryMap.maxByOrNull { it.value }
-
-        highestCategory?.let {
-
-            val percent =
-                (it.value / totalIncome) * 100
-
-            if (percent > 30) {
-
-                val reduceAmount = it.value * 0.15
-
-                recommendations.add(
-                    Recommendation(
-                        title = "💡 Reduce ${it.key}",
-                        description = "Reduce ${it.key} spending by ₹${reduceAmount.toInt()} per month.",
-                        priority = 2
-                    )
-                )
-            }
+        val status = when {
+            score >= 60 -> "Good"
+            score >= 30 -> "Moderate"
+            else -> "Risk"
         }
 
-        // 🔹 Savings Goal Suggestion
-        val suggestedSavings = totalIncome * 0.2
+        return FinancialHealth(score, status, totalIncome, totalExpense, savings)
+    }
 
+    fun generateRecommendations(
+        transactions: List<ExpenseEntity>,
+        health: FinancialHealth
+    ): List<Recommendation> {
+
+        val recommendations = mutableListOf<Recommendation>()
+
+        // 🔹 Financial Summary (now inside list)
         recommendations.add(
             Recommendation(
-                title = "🎯 Monthly Savings Target",
-                description = "Try to save ₹${suggestedSavings.toInt()} this month.",
-                priority = 1
+                title = "💰 Financial Summary",
+                description =
+                    "💵 Income: ₹${health.income.toInt()}\n" +
+                            "💸 Expense: ₹${health.expense.toInt()}\n" +
+                            "💎 Savings: ₹${health.savings.toInt()}"
             )
-
-
-
         )
 
-        return recommendations.sortedByDescending { it.priority }
+
+        val expenses =
+            transactions.filter { it.transactionType == TransactionType.EXPENSE }
+
+        val categoryTotals =
+            expenses.groupBy { it.category }
+                .mapValues { it.value.sumOf { tx -> tx.amount } }
+
+        categoryTotals.maxByOrNull { it.value }?.let {
+            recommendations.add(
+                Recommendation(
+                    title = "📊 Highest Spending Category",
+                    description =
+                        "${it.key} costs you ₹${it.value.toInt()} this period."
+                )
+            )
+        }
+
+        if (health.score < 60 && health.income > 0) {
+            val suggestedSavings = health.income * 0.2
+            recommendations.add(
+                Recommendation(
+                    title = "🎯 Savings Suggestion",
+                    description =
+                        "Try saving ₹${suggestedSavings.toInt()} this month."
+                )
+            )
+        }
+
+        return recommendations
     }
 }

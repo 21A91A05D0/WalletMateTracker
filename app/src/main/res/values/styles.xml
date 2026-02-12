@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.WalletMate" parent="Theme.Material3.DayNight.NoActionBar"/>
+
+
     <style name="TextLabel">
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:textColor">@color/text_secondary</item>
